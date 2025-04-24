@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Body and Background */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: #e0f7ff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    /* Heading Styling */
+    h2 {
+      color: #00eaff;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px rgba(0, 234, 255, 0.6);
+      font-size: 2em;
+    }
+
+    /* Form Box */
+    .form-container {
+      background: rgba(21, 26, 48, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 30px rgba(0, 234, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .form-container:hover {
+      box-shadow: 0 0 50px rgba(0, 234, 255, 0.4);
+    }
+
+    /* Form Input Fields */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background-color: #1d263b;
+      color: #fff;
+      font-size: 1em;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      box-shadow: 0 0 10px #00eaff;
+    }
+
+    /* Register Button */
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #00eaff, #007fff);
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00eaff;
+    }
+
+    /* Links */
+    p {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    p a {
+      color: #00eaff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    p a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    /* Error Messages */
+    .msg {
+      background: rgba(255, 0, 0, 0.2);
+      color: #ffdddd;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1em;
+      display: none;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.8em;
+      }
+
+      .form-container {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Register</h2>
+  <div class="form-container">
+    <form method="POST">
+      <span style="display: none;">{% csrf_token %}</span>
+      <input type="text" name="username" placeholder="Username" required><br>
+      <input type="email" name="email" placeholder="Email" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+    <div class="msg">
+      {% for msg in messages %}
+        <p>{{ msg }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    // If there are error messages, display the message box
+    if (document.querySelector('.msg p')) {
+      document.querySelector('.msg').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NeuraNote Dashboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #1b1f3a, #232946);
+      color: #e0f7ff;
+    }
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 50px;
+      padding: 10px 30px;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .top-nav span {
+      margin-right: 15px;
+      color: #00eaff;
+    }
+
+    .top-nav a {
+      color: #00eaff;
+      text-decoration: none;
+      border: 1px solid #00eaff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .top-nav a:hover {
+      background-color: #00eaff;
+      color: #000;
+    }
+
+    .main {
+      padding-top: 80px;
+      text-align: center;
+    }
+
+    .window {
+      background: #151a30;
+      padding: 40px 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 0 25px rgba(0, 234, 255, 0.15);
+    }
+
+    h2 {
+      font-size: 2.5em;
+      color: #00eaff;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      background: linear-gradient(to right, #00eaff, #007fff);
+      color: white;
+      padding: 14px 30px;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00eaff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <div class="top-nav">
+    <span>Hey {{ user.username }}</span> | <a href="{% url 'logout' %}">Logout</a>
+  </div>
+
+  <!-- MAIN SECTION -->
+  <div class="main">
+    <div class="window">
+      <h2>Welcome to NeuraNote 🧠</h2>
+      <p>Your intelligent note-taking assistant is ready!</p>
+
+      <!-- EXPLORE BUTTON -->
+      <a href="http://127.0.0.1:8000/notes/" class="btn">Explore NeuraNotes →</a>
+
+      {% if not user.is_authenticated %}
+      <p style="margin-top: 20px;">
+        <a href="{% url 'login' %}" style="color:#00eaff;">Login</a> or 
+        <a href="{% url 'register' %}" style="color:#00eaff;">Register</a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>
+
+{% endblock %}

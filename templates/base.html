@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NeuraNote</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #1b1f3a, #232946);
+      color: #ffffff; overflow-x: hidden; text-align: center;
+    }
+    h1 {
+      font-size: 3em; color: #00eaff; margin-top: 50px;
+      text-shadow: 0 0 15px rgba(0,234,255,0.6);
+      transition: 0.3s ease-in-out;
+    }
+    p {
+      font-size: 1.2em; margin: 10px 0;
+    }
+    .nav-link {
+      color: #00eaff; text-decoration: none; margin: 0 10px;
+      font-weight: 500; transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      color: white; text-shadow: 0 0 10px #00eaff;
+    }
+    .btn {
+      background: linear-gradient(90deg, #00eaff, #007fff);
+      padding: 14px 32px; border-radius: 30px;
+      color: white; font-size: 1.1em; font-weight: bold;
+      box-shadow: 0 0 20px rgba(0,234,255,0.5);
+      transition: all 0.3s ease-in-out;
+      text-decoration: none; display: inline-block; margin-top: 40px;
+    }
+    .btn:hover {
+      transform: scale(1.08); box-shadow: 0 0 35px #00eaff;
+    }
+    .divider {
+      width: 80%; height: 1px; margin: 40px auto;
+      background: rgba(255,255,255,0.1);
+    }
+    .content {
+      animation: fadeUp 1s ease-in-out;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .logo {
+      width: 80px; margin-bottom: 20px;
+      filter: drop-shadow(0 0 5px #00eaff);
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <img src="https://cdn-icons-png.flaticon.com/512/4149/4149655.png" alt="logo" class="logo">
+    <h1>NeuraNote</h1>
+
+    <!-- Login/Register/Logout Display Logic -->
+    {% if user.is_authenticated %}
+      <p>Hello, <strong>{{ user.username }}</strong> |
+        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+      </p>
+    {% else %}
+      <p>
+        <a href="{% url 'login' %}" class="nav-link">Login</a> |
+        <a href="{% url 'register' %}" class="nav-link">Register</a>
+      </p>
+    {% endif %}
+
+    <div class="divider"></div>
+
+    <!-- Django Content Block -->
+    {% block content %}
+    <p>Welcome to NeuraNote – your personal AI-powered notes dashboard.</p>
+    {% endblock %}
+
+    <!-- CTA Button -->
+    <a href="{% url 'about' %}" class="btn">About NeuraNote</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# core/utils.py
+import openai
+from django.conf import settings
+
+# Use the API key from settings
+openai.api_key = settings.OPENAI_API_KEY
+
+def generate_summary(text):
+    prompt = f"Summarize the following note in 2-3 lines:\n\n{text}"
+    response = openai.Completion.create(
+        model="text-davinci-003",  # You can change the model if needed
+        prompt=prompt,
+        max_tokens=100
+    )
+    return response.choices[0].text.strip()
+
+def suggest_tags(text):
+    prompt = f"Suggest 3-5 short tags for the following note:\n\n{text}"
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        max_tokens=60
+    )
+    return response.choices[0].text.strip()
+
+def suggest_title(text):
+    prompt = f"Suggest a good short title for the following note:\n\n{text}"
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        max_tokens=30
+    )
+    return response.choices[0].text.strip()

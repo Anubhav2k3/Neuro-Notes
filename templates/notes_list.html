@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Notes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Body and Background */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: #e0f7ff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Heading */
+    h2 {
+      color: #00eaff;
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(0, 234, 255, 0.6);
+    }
+
+    /* Add Note Link */
+    a {
+      color: #00eaff;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+    }
+
+    a:hover {
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    /* Notes List */
+    ul {
+      list-style-type: none;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    li {
+      background: rgba(21, 26, 48, 0.8);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    li:hover {
+      box-shadow: 0 0 30px rgba(0, 234, 255, 0.6);
+    }
+
+    h3 {
+      color: #00eaff;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px rgba(0, 234, 255, 0.4);
+    }
+
+    p {
+      color: #e0f7ff;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    small {
+      color: #b3b3b3;
+      font-size: 0.9em;
+    }
+
+    /* Edit, Delete, and AI Tools Links */
+    a {
+      color: #00eaff;
+      font-weight: 600;
+      font-size: 1.1em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+      ul {
+        padding-left: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Notes</h2>
+
+  <a href="{% url 'note_create' %}">+ Add Note</a>
+
+  <ul>
+    {% for note in notes %}
+      <li>
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.content|truncatewords:20 }}</p>
+        <small>{{ note.created_at }}</small><br>
+        <a href="{% url 'note_edit' note.pk %}">Edit</a> |
+        <a href="{% url 'note_delete' note.pk %}">Delete</a> |
+        <a href="{% url 'note_ai_tools' note.pk %}">AI Tools</a>
+      </li>
+    {% empty %}
+      <li>No notes found.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
