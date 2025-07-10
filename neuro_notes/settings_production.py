@@ -67,4 +67,4 @@ LOGGING = {
 }
 
 # Gemini API Key from environment
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyD2qKRhDjj6-j9vKWq6sxeJk3_eRYsQS5I')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'PASTE YOUR API KEY HERE')
